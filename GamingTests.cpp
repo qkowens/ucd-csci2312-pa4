@@ -92,7 +92,8 @@ void test_piece_print(ErrorContext &ec, unsigned int numRuns) {
             int id = 0;
             std::regex re("S[[:d:]]{1,}[ ]"); // ECMAScript, by default
             std::smatch m;
-            std::regex_search(ss.str(), m, re);
+			std::string search_str(ss.str());
+            //std::regex_search(ss.str(), m, re);
             if (m.size() != 1) { // parse problem
                 pass = false;
             } else {

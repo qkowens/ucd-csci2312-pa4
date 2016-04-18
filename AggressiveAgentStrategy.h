@@ -9,7 +9,8 @@
 
 namespace Gaming {
 
-    class AggressiveAgentStrategy : public Strategy {
+    class AggressiveAgentStrategy : public Strategy 
+	{
         double __agentEnergy;
 
     public:
@@ -24,4 +25,4 @@ namespace Gaming {
 }
 
 
-#endif //PA5GAME_AGGRESSIVEAGENTSTRATEGY_H
+#endif PA5GAME_AGGRESSIVEAGENTSTRATEGY_H
