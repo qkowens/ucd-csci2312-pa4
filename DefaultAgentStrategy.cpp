@@ -27,7 +27,7 @@ namespace Gaming
 				advant.push_back(i);
 			else if (s.array[i] == 2)
 				food.push_back(i);
-			else if (s.array[i] == 7)
+			else if (s.array[i] == 6)
 				empty.push_back(i);
 			else if (s.array[i] == 0)
 				simple.push_back(i);

@@ -29,13 +29,13 @@ namespace Gaming
 
 	double Advantage::getCapacity() const
 	{
-		return __capacity;
+		return __capacity * ADVANTAGE_MULT_FACTOR;
 	}
 
 	double Advantage::consume()
 	{
 		finish();
-		return __capacity*ADVANTAGE_MULT_FACTOR;
+		return __capacity * ADVANTAGE_MULT_FACTOR;
 	}
 
 }

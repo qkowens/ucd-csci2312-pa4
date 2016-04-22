@@ -79,7 +79,6 @@ namespace Gaming
 	}
 	void PosVectorEmptyEx::__print_args(std::ostream & os) const
 	{
-		os << __name;
 	}
 	PosVectorEmptyEx::PosVectorEmptyEx()
 	{

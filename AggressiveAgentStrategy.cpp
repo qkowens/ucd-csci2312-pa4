@@ -25,79 +25,63 @@ namespace Gaming
 
 	ActionType AggressiveAgentStrategy::operator()(const Surroundings &s) const
 	{
-		Position moveTo;
-		PositionRandomizer randomTarget;
-		std::vector<int> agent, advant, food, empty;
+		bool noMove = true;
+		int direction = -1;
 
-		// record the surroundings, excluding itself
-		for (int i = 0; i < 9; i++)
+		std::vector<int> advantages, food, agents, empties;
+
+		for (int n = 0; n < s.array.size(); n++)
 		{
-			if (s.array[i] == 0 || s.array[i] == 1)
-				agent.push_back(i);
-
-			else if (s.array[i] == 3)
-				advant.push_back(i);
-
-			else if (s.array[i] == 2)
-				food.push_back(i);
-
-			else if (s.array[i] == 6)
-				empty.push_back(i);
-
-			if (i == 3)  //This is where the agent is
-				i++;
+			int temp = n;
+			if (s.array[n] == ADVANTAGE)
+				advantages.push_back(temp);
+			if (s.array[n] == FOOD)
+				food.push_back(temp);
+			if (s.array[n] == SIMPLE || s.array[n] == STRATEGIC)
+				agents.push_back(temp);
+			if (s.array[n] == EMPTY)
+				empties.push_back(temp);
 		}
 
+		if (!empties.empty())
+			direction = empties[rand() % empties.size()];
 
-		// determine the course of action
-		if (!agent.empty() && __agentEnergy >= DEFAULT_AGGRESSION_THRESHOLD)  
-			moveTo = randomTarget(agent);
+		if (!food.empty())
+			direction = food[rand() % food.size()];
 
-		else if (!advant.empty())
-			moveTo = randomTarget(advant);
+		if (!advantages.empty())
+			direction = advantages[rand() % advantages.size()];
 
-		else if (!food.empty())
-			moveTo = randomTarget(food);
+		if (!agents.empty() && __agentEnergy >= DEFAULT_AGGRESSION_THRESHOLD)
+			direction = agents[rand() % agents.size()];
 
-		else if (!empty.empty())
-			moveTo = randomTarget(empty);
+		if (direction == 0)
+			return NW;
 
-		else
+		if (direction == 1)
+			return N;
+
+		if (direction == 2)
+			return NE;
+
+		if (direction == 3)
+			return W;
+
+		if (direction == 4)
 			return STAY;
 
+		if (direction == 5)
+			return E;
 
+		if (direction == 6)
+			return SW;
 
-		// return the direction based on PositionRandomizer position
-		switch (moveTo.x)
-		{
-		case 0:
-		{
-			switch (moveTo.y)
-			{
-			case 0: return NE;
-			case 1: return N;
-			case 2: return NW;
-			}
-		}
-		case 1:
-		{
-			switch (moveTo.y)
-			{
-			case 0: return E;
-			case 1: return STAY;
-			case 2: return W;
-			}
-		}
-		case 2:
-		{
-			switch (moveTo.y)
-			{
-			case 0: return SE;
-			case 1: return S;
-			case 2: return SW;
-			}
-		}
-		}
+		if (direction == 7)
+			return S;
+
+		if (direction == 8)
+			return SE;
+
 		return STAY;
 	}
 }

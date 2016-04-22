@@ -22,28 +22,28 @@ namespace Gaming
 
 	void Simple::print(std::ostream & os) const
 	{
-		os << this->SIMPLE_ID << std::left << std::setw(4) << this->__id;
-		os << std::setw(0);
+		os << SIMPLE_ID << std::left << std::setw(4) << __id << std::setw(0);
 	}
 
 	ActionType Simple::takeTurn(const Surroundings & s) const
 	{
-		std::vector<int> resources, empty;
+		std::vector<int> resources, empties;
+		Position curr(1, 1);
 
-		Position pos(1, 1);
-
-		for (int count = 0; count < s.array.size(); ++count) 
+		for (int pos = 0; pos < 9; ++pos)
 		{
-			if (s.array[count] == FOOD || s.array[count] == ADVANTAGE)
-				resources.push_back(count);
-			else if (s.array[count] == EMPTY)
-				empty.push_back(count);
+			if (s.array[pos] == FOOD || s.array[pos] == ADVANTAGE)
+				resources.push_back(pos);
+			else if (s.array[pos] == EMPTY)
+				empties.push_back(pos);
 		}
 
-		if (resources.size() > 0)
-			return __game.reachSurroundings(pos, Game::randomPosition(resources));
-		else if (empty.size() > 0)
-			return __game.reachSurroundings(pos, Game::randomPosition(empty));
+		if (resources.size())
+			return __game.reachSurroundings(curr, Game::randomPosition(resources));
+
+		else if (empties.size())
+			return __game.reachSurroundings(curr, Game::randomPosition(empties));
+
 		else
 			return STAY;
 	}

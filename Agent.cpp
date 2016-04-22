@@ -39,7 +39,7 @@ namespace Gaming
 			this->__energy -= operand->__energy;
 			operand->finish();
 		}
-		else if (this->__energy = operand->__energy)
+		else if (this->__energy == operand->__energy)
 		{
 			this->finish();
 			operand->finish();
